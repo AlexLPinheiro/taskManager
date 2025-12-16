@@ -30,6 +30,26 @@ public class Task {
         return taskName;
     }
 
+    public void setTaskName(String taskName){
+        this.taskName = taskName;
+    }
+
+    public LocalDate getCreationDate(){
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate){
+        this.creationDate = creationDate;
+    }
+
+    public LocalDate getExpirationDate(){
+        return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDate expirationDate){
+        this.expirationDate = expirationDate;
+    }
+
 
 }
 
