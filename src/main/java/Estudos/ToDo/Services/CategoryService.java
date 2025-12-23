@@ -1,7 +1,7 @@
 package Estudos.ToDo.Services;
 
-import Estudos.ToDo.Dtos.CategoryRequestDTO;
-import Estudos.ToDo.Dtos.CategoryResponseDTO;
+import Estudos.ToDo.Dtos.CategoryDTOs.CategoryRequestDTO;
+import Estudos.ToDo.Dtos.CategoryDTOs.CategoryResponseDTO;
 import Estudos.ToDo.Entities.Category;
 import Estudos.ToDo.Repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
@@ -18,8 +18,28 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public List<Category> getAll(){
-        return categoryRepository.findAll();
+    public List<CategoryResponseDTO> getAll(){
+
+        return categoryRepository.findAll()
+                .stream()
+                .map(category -> new CategoryResponseDTO(
+                        category.getId(),
+                        category.getCategoryName()
+                ))
+                .toList();
+
+        //pode ser feito desta forma tbm (mais manual):
+
+        //List<Category> categories = categoryRepository.findAll();
+        //List<CategoryResponseDTO> dtos = new ArrayList<>();
+        //for (Category category : categories) {
+        //  dtos.add(new CategoryResponseDTO){
+        //      category.getId(),
+        //      category.getCategoryName()
+        //  ));
+        //}
+
+        //return dtos
     }
 
     public CategoryResponseDTO create(CategoryRequestDTO dto){

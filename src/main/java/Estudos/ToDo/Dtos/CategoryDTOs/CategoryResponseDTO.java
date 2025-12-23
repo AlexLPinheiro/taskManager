@@ -1,4 +1,4 @@
-package Estudos.ToDo.Dtos;
+package Estudos.ToDo.Dtos.CategoryDTOs;
 
 public record CategoryResponseDTO (
   Long id,
