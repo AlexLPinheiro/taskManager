@@ -4,6 +4,7 @@ import Estudos.ToDo.Dtos.CategoryDTOs.CategoryRequestDTO;
 import Estudos.ToDo.Dtos.CategoryDTOs.CategoryResponseDTO;
 import Estudos.ToDo.Entities.Category;
 import Estudos.ToDo.Repositories.CategoryRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,8 +55,13 @@ public class CategoryService {
         );
     }
 
-    public Optional<Category> getById(Long Id){
-        return categoryRepository.findById(Id);
+    public CategoryResponseDTO getById(Long Id){
+        Category category = categoryRepository.findById(Id).orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada"));
+
+        return new CategoryResponseDTO(
+                category.getId(),
+                category.getCategoryName()
+        );
     }
 
     public void delete(Long Id){
