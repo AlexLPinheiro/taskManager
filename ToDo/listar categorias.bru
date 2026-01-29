@@ -7,9 +7,15 @@ meta {
 get {
   url: http://localhost:8080/categories
   body: none
-  auth: inherit
+  auth: basic
+}
+
+auth:basic {
+  username: user
+  password: 0f4792ac-3b3a-4834-a60f-32f7f52d8ca7
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }

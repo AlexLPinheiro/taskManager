@@ -5,11 +5,23 @@ meta {
 }
 
 post {
-  url: htp://localhost:8080/categories
-  body: none
-  auth: inherit
+  url: http://localhost:8080/categories
+  body: json
+  auth: basic
+}
+
+auth:basic {
+  username: user
+  password: 0f4792ac-3b3a-4834-a60f-32f7f52d8ca7
+}
+
+body:json {
+  {
+    "categoryName" : "tarefa da faculadae"
+  }
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }
