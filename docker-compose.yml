@@ -3,19 +3,18 @@ version: "3.9"
 services:
   # Serviço da Aplicação Spring Boot
   app:
-    build: .             # Constrói a imagem usando o Dockerfile na pasta atual
+    build: .           
     container_name: todo_app
     ports:
-      - "8080:8080"      # Porta externa : Porta interna
+      - "8080:8080"      
     depends_on:
-      - postgres         # Garante que o app só inicie depois que o container do banco subir
+      - postgres        
     environment:
-      # AQUI ESTÁ O TRUQUE: Sobrescrevemos o application.properties
-      # Dentro da rede do Docker, usamos o nome do serviço "postgres" e a porta interna "5432"
+
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/todo_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
-      # Opcional: Para criar as tabelas automaticamente no Docker também
+
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
     networks:
       - todo-network
@@ -29,7 +28,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - "5433:5432" # Mapeamento para acesso local (se quiser conectar via IDE)
+      - "5433:5432" 
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
