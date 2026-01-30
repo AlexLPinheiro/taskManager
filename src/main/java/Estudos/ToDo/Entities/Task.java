@@ -18,10 +18,11 @@ public class Task {
     @JoinColumn(name="category_id")
     private Category category;
 
-    public Task (String taskName, LocalDate creationDate, LocalDate expirationDate){
+    public Task (String taskName, LocalDate creationDate, LocalDate expirationDate, Category category){
         this.taskName = taskName;
         this.creationDate = creationDate;
         this.expirationDate = expirationDate;
+        this.category = category;
     }
 
     public Task(){}
@@ -54,6 +55,12 @@ public class Task {
         this.expirationDate = expirationDate;
     }
 
+    public Category getCategory() {
+        return category;
+    }
 
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }
 

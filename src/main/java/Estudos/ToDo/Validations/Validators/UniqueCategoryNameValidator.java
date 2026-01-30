@@ -4,16 +4,18 @@ import Estudos.ToDo.Repositories.CategoryRepository;
 import Estudos.ToDo.Validations.Annotations.UniqueCategoryName;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UniqueCategoryNameValidator
         implements ConstraintValidator<UniqueCategoryName, String> {
 
-    private final CategoryRepository categoryRepository;
+    @Autowired
+    private CategoryRepository repository;
 
-    public UniqueCategoryNameValidator(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
+    public UniqueCategoryNameValidator() {
+
     }
 
     @Override
@@ -23,7 +25,7 @@ public class UniqueCategoryNameValidator
             return true;
         }
 
-        return !categoryRepository.existsByCategoryName(value);
+        return !repository.existsByCategoryName(value);
     }
 }
 

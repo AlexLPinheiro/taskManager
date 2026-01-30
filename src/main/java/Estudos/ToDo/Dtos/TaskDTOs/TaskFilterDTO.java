@@ -2,11 +2,9 @@ package Estudos.ToDo.Dtos.TaskDTOs;
 
 import java.time.LocalDate;
 
-public record TaskRequestDTO(
+public record TaskFilterDTO (
         String taskName,
-        LocalDate creationDate,
         LocalDate expirationDate,
         Long categoryId
-
-) {
-}
+)
+{}

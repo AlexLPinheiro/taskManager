@@ -1,5 +1,6 @@
 package Estudos.ToDo.Controllers;
 
+import Estudos.ToDo.Dtos.TaskDTOs.TaskFilterDTO;
 import Estudos.ToDo.Dtos.TaskDTOs.TaskRequestDTO;
 import Estudos.ToDo.Dtos.TaskDTOs.TaskResponseDTO;
 import Estudos.ToDo.Dtos.TaskDTOs.TaskUpdateDTO;
@@ -27,6 +28,20 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getAll());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<TaskResponseDTO> getById(
+            @PathVariable Long id
+    ){
+      return ResponseEntity.ok(taskService.getById(id));
+    };
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<TaskResponseDTO>> filterTasks(
+            @Valid TaskFilterDTO filter
+            ) {
+        return ResponseEntity.ok(taskService.filterTasks(filter));
+    }
+
     @PostMapping
     public ResponseEntity<TaskResponseDTO> create(
             @Valid @RequestBody TaskRequestDTO dto
@@ -36,7 +51,7 @@ public class TaskController {
         return ResponseEntity.status(200).body(response);
     }
 
-    @PutMapping("/tasks/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<TaskResponseDTO> update(
             @Valid @RequestBody TaskUpdateDTO dto, @PathVariable Long id
     ){
@@ -45,7 +60,7 @@ public class TaskController {
         return ResponseEntity.status(204).body(response);
     }
 
-    @DeleteMapping("/tasks/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         taskService.delete(id);
         return ResponseEntity.noContent().build();

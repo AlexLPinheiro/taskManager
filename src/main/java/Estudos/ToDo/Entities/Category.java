@@ -11,7 +11,6 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_generator")
     private Long id;
 
-    @UniqueCategoryName
     private String categoryName;
 
     public Category(String categoryName){
