@@ -1,14 +1,14 @@
-# Etapa 1 - Buildar a aplicação
-FROM maven:3.9.6-eclipse-temurin-17 AS build
+# Etapa 1 - Build
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
-COPY pom.xml /app/pom.xml
+COPY pom.xml .
 RUN mvn dependency:go-offline
 COPY src ./src
-RUN mvn clean package -Dmaven.test.skip=true
+# O -DskipTests agiliza o build pulando os testes unitários
+RUN mvn clean package -DskipTests
 
-
-# Etapa 2 - runtime
-FROM eclipse-temurin:17-jre
+# Etapa 2 - Runtime
+FROM eclipse-temurin:21-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
